@@ -1,0 +1,43 @@
+{include file="common/login_top"/}
+<body class="gray-bg">
+
+    <div class="middle-box text-center loginscreen  animated fadeInDown">
+        <div>
+            <div>
+
+                <h1 class="logo-name">H+</h1>
+
+            </div>
+            <h3>欢迎使用 H+</h3>
+
+            <form class="m-t" role="form" action="loginHandle" method="post">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="用户名" name="username" required="" autocomplete="off">
+                </div>
+
+                <div class="form-group">
+                    <input type="password" class="form-control" placeholder="密码" name="password" autocomplete="off" required="">
+                </div>
+                <div class="form-group row">
+                     <div class="col-xs-3 text-center" style="font-size: 1.5rem;margin-top: 15px; ">验证码</div>
+                    <div class="col-xs-9"><img style="width: 100%;" onClick="this.src=this.src+'?'" src="{:captcha_src()}" alt="captcha" /></div>
+                </div>
+
+                 <div class="form-group">
+                    <input type="text" class="form-control" placeholder="验证码" name="check" autocomplete="off" required="">
+                </div>
+                <input type="hidden" name="__token__" value="{$Request.token}" />
+
+                <button type="submit" class="btn btn-primary block full-width m-b">登 录</button>
+
+
+                <!-- <p class="text-muted text-center"> <a href="login.html#"><small>忘记密码了？</small></a> | <a href="register.html">注册一个新账号</a>
+                </p> -->
+
+            </form>
+        </div>
+    </div>
+</body>
+
+{include file="common/login_bottom" /}
+</html>

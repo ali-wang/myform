@@ -1,0 +1,105 @@
+{include file="common/login_top"/}
+
+<body class="gray-bg">
+    <div class="wrapper wrapper-content animated fadeIn">
+        <div class="row">
+        <div class="col-md-1"><a type="button" class="btn btn-sm btn-primary" href="javascript:window.location.reload();">刷新</a></div>
+            <div class="col-sm-12">
+
+                <table class="layui-hide" id="test" lay-filter="test"></table>
+
+				
+				<script type="text/html" id="barDemo">
+				  <!-- <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a> -->
+				  <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+				</script>
+            </div>
+
+        </div>
+    </div>
+	
+
+    <!-- 全局js -->
+    {include file="common/login_bottom" /}
+		<script>
+			layui.use('table', function(){
+			  var table = layui.table;
+			  
+			  table.render({
+			    elem: '#test',
+			    url:'admin_superdata',
+			    toolbar: '#toolbarDemo',
+			    title: '用户数据表',
+			    initSort: {
+			    		field: 'id', //排序字段，对应 cols 设定的各字段名
+              			type: 'desc' //排序方式  asc: 升序、desc: 降序、null: 默认排序
+          				},
+          		sort:true,  //重点1：这里的sort表示 table表在取得接口数据后，对页面渲染后的table数据进行排序。同时，这里的true 会影响页面sort 上下小箭头的 显示效果
+		          method: 'post',
+		          page: true,
+		          limit: 10,
+			    cols: [[
+			      {field:'id', title:'ID', width:80, fixed: 'left', unresize: true, sort: true}
+			      ,{field:'username', title:'用户名', width:120,}
+			      ,{field:'phone', title:'电话', width:130, edit: 'text', sort: true}
+			      ,{field:'address', title:'地址', width:180}
+			      ,{field:'writedress', title:'填写地址',width:200}
+			      ,{field:'message', title:'留言', width:80}
+			      ,{field:'ip', title:'IP', width:120}
+			      ,{field:'ipdress', title:'解析地址', width:150}
+			      ,{field:'local_url', title:'落地页', width:160}
+			      ,{field:'time', title:'时间', width:170}
+			      ,{field:'local_ref', title:'搜索词', width:120}
+			      ,{field:'utm_medium', title:'计划', width:120}
+			      ,{field:'utm_content', title:'单元', width:120}
+			      ,{field:'utm_term', title:'关键字', width:120}
+			      
+			      ,{fixed: 'right', title:'操作', toolbar: '#barDemo', width:80}
+			    ]]
+			    ,page: true
+			  });
+			  
+			 
+			  //监听行工具事件
+			  table.on('tool(test)', function(obj){
+			    var data = obj.data;
+			    // console.log(obj)
+			    if(obj.event === 'del'){
+			      layer.confirm('真的删除行么？',{btn: ['确定', '取消'],title:"提示"}, function(index){
+			      	console.log(obj.data.id);
+			      	dele(obj.data,obj);
+			       
+			      });
+			    } 
+			    
+			  });
+			});
+
+			function dele(id,obj) {
+				$.ajax({
+					url: 'admin_superdele',
+					type: 'POST',
+					 // datatype: json,
+					data: id,
+					success:function(msg){
+						msg = JSON.parse(msg);
+						console.log(typeof(msg));
+						console.log(msg.msg);
+						if(msg.code =="1"){
+							layer.msg('删除成功！');
+							 obj.del();
+			        		// layer.close(index);
+			        		
+						}else{
+							layer.msg('删除失败！'); 
+						}
+					}
+				})
+				
+				
+			}
+	</script>
+
+</body>
+
+</html>

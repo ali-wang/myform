@@ -1,0 +1,226 @@
+
+{include file="common/login_top"/}
+
+<body class="fixed-sidebar full-height-layout gray-bg" style="overflow:hidden">
+    <div id="wrapper">
+        <!--左侧导航开始-->
+        <nav class="navbar-default navbar-static-side" role="navigation">
+            <div class="nav-close"><i class="fa fa-times-circle"></i>
+            </div>
+            <div class="sidebar-collapse">
+                <ul class="nav" id="side-menu">
+                    <li class="nav-header">
+                        <div class="dropdown profile-element">
+                            <span><img alt="image" class="img-circle" src="__public__/img/profile_small.jpg" /></span>
+                            <a data-toggle="dropdown" class="dropdown-toggle">
+                                <span class="clear">
+                               <span class="block m-t-xs"><strong class="font-bold">{$member['username']}</strong></span>
+                                <span class="text-muted text-xs block">{$member['title']}<b class="caret"></b></span>
+                                </span>
+                            </a>
+                            <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                               <!--  <li><a class="J_menuItem" href="form_avatar.html">修改头像</a>
+                                </li>-->
+                               
+                                <!-- <li class="divider"></li> -->
+                                <li><a href="../login/logout">安全退出</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="logo-element">H+
+                        </div>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-home"></i>
+                            <span class="nav-label">主页</span>
+                            <span class="fa arrow"></span>
+                        </a>
+                        <ul class="nav nav-second-level">
+                            
+                        {switch name="$member['group']"}
+                            {case value="1"}
+                            <li>
+                                <a class="J_menuItem" onclick="loadIframe('../Showdata/admin_super')">全部信息</a>
+                            </li>
+                             {/case}
+
+                            {case value="2"}
+                                <li>
+                                    <a class="J_menuItem" onclick="loadIframe('../Showdata/admin_customer')">客户信息</a>
+                                </li>
+                            {/case}
+                                {default /}
+                                <li>
+                                <a class="J_menuItem" onclick="loadIframe('../Showdata/admin_extension')">推广信息</a>
+                                </li>
+                            {/switch}
+                          <!--   <li>
+                                <a class="J_menuItem" onclick="loadIframe('../Showdata/admin_super')">全部信息</a>
+                            </li>
+                            
+                            <li>
+                                <a class="J_menuItem" onclick="loadIframe('../Showdata/admin_customer')">客户信息</a>
+                            </li>
+
+                            <li>
+                                <a class="J_menuItem" onclick="loadIframe('../Showdata/admin_extension')">推广信息</a>
+                            </li> -->
+
+                           
+                            
+                            
+                        
+                        </ul>
+
+                    </li>
+                 
+
+                    
+                   
+                {if condition="$member['group'] eq 1"}
+                    <li>
+                        <a href="#">
+                            <i class="fa fa fa-bar-chart-o"></i>
+                            <span class="nav-label">权限设置</span>
+                            <span class="fa arrow"></span>
+                        </a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                               <a class="J_menuItem" onclick="loadIframe('../Adminadd/admin_show')">展示管理员</a>
+                            </li>
+                            <li>
+                                 <a class="J_menuItem" onclick="loadIframe('../Adminadd/admin_add')">添加管理员</a>
+                            </li>
+                            <li>
+                                <a class="J_menuItem" onclick="loadIframe('../Usergroup/create_group')">创建组</a>
+                            </li>
+                            
+                        </ul>
+                    </li>
+                {/if}
+    
+
+                </ul>
+            </div>
+        </nav>
+        <!--左侧导航结束-->
+        <!--右侧部分开始-->
+        <div id="page-wrapper" class="gray-bg dashbard-1">
+            <div class="row border-bottom">
+                <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
+                    <div class="navbar-header"><a class="navbar-minimalize minimalize-styl-2 btn btn-primary " ><i class="fa fa-bars"></i> </a>
+                        <!-- <form role="search" class="navbar-form-custom" method="post" action="search_results.html">
+                            <div class="form-group">
+                                <input type="text" placeholder="请输入您需要查找的内容 …" class="form-control" name="top-search" id="top-search">
+                            </div>
+                        </form> -->
+                    </div>
+                    <ul class="nav navbar-top-links navbar-right">
+                        
+                        <li class="dropdown">
+                            <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
+                                <i class="fa fa-bell"></i> <span class="label label-primary">8</span>
+                            </a>
+                          
+                        </li>
+                        
+                      
+                    </ul>
+                </nav>
+            </div>
+            <div class="row content-tabs">
+                <button class="roll-nav roll-left J_tabLeft"><i class="fa fa-backward"></i>
+                </button>
+                <nav class="page-tabs J_menuTabs">
+                    <div class="page-tabs-content">
+                        <a href="javascript:;" class="active J_menuTab" data-id="index_v1.html">首页</a>
+                    </div>
+                </nav>
+             
+                <a href="../login/logout" class="roll-nav roll-right J_tabExit"><i class="fa fa fa-sign-out"></i> 退出</a>
+            </div>
+            <div class="row J_mainContent" id="content-main">
+               <!--  <iframe id="iframe" class="J_iframe" name="iframe0" width="100%" height="100%" src="../Showdata/admin_super" frameborder="0" scrolling="yes" seamless></iframe> -->
+                {switch name="$member['group']"}
+                    {case value="1"}
+                     <iframe id="iframe" class="J_iframe" name="iframe0" width="100%" height="100%" src="../Showdata/admin_super" frameborder="0" scrolling="yes" seamless></iframe>
+                   
+                     {/case}
+
+                    {case value="2"}
+                     <iframe id="iframe" class="J_iframe" name="iframe0" width="100%" height="100%" src="../Showdata/admin_customer" frameborder="0" scrolling="yes" seamless></iframe>
+                        
+                    {/case}
+                        {default /}
+                         <iframe id="iframe" class="J_iframe" name="iframe0" width="100%" height="100%" src="../Showdata/admin_extension" frameborder="0" scrolling="yes" seamless></iframe>
+                        
+                {/switch}
+               <!--  <iframe id="iframe" class="J_iframe" name="iframe0" width="100%" height="100%" src="../Showdata/admin_super" frameborder="0" scrolling="yes" seamless></iframe> -->
+
+            </div>
+            <div class="footer">
+                <div class="pull-right">alile工作室</div>
+            </div>
+        </div>
+        <!--右侧部分结束-->
+        <!--右侧边栏开始-->
+        
+        <!--右侧边栏结束-->
+        <!--mini聊天窗口开始-->
+        
+        <div id="small-chat">
+            <span class="badge badge-warning pull-right">5</span>
+            <a class="open-small-chat">
+                <i class="fa fa-comments"></i>
+
+            </a>
+        </div>
+        <!--mini聊天窗口结束-->
+    </div>
+
+    <!-- 全局js -->
+     <script src="__public__/js/jquery.min.js?v=2.1.4"></script>
+    <script src="__public__/js/bootstrap.min.js?v=3.3.6"></script>
+    <script src="__public__/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="__public__/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+    <script src="__public__/js/plugins/layer/layer.min.js"></script>
+
+    <!-- 自定义js -->
+    <script src="__public__/js/hplus.js?v=4.1.0"></script>
+    <script type="text/javascript" src="__public__/js/contabs.js"></script>
+
+    <!-- 第三方插件 -->
+    <script src="__public__/js/plugins/pace/pace.min.js"></script>
+    
+
+    <script>
+        function loadIframe(url) {
+            //获取url链接
+            var u = window.location.href;
+            //因为每次获取的链接中都有之前的旧锚点，
+            //所以需要把#之后的旧锚点去掉再来加新的锚点（即传入的url参数）
+            var end = u.indexOf("#");
+            var rurl = u.substring(0,end);
+            //设置新的锚点
+            window.location.href = rurl + "#" + url;
+        }
+
+
+        window.onhashchange = function() {
+            //location.hash取到的是url链接中#(包括自己)后面的内容
+            var hash = location.hash;
+            //去掉#号，得到的就是我们要设置到iframe中src上的地址
+            var url = hash.substring(1,hash.length);
+            $("#iframe").attr("src", url);
+        }
+
+        var hash = location.hash;
+        var url = hash.substring(1,hash.length);
+        $("#iframe").attr("src", url);
+        
+    </script>
+
+</body>
+
+</html>
